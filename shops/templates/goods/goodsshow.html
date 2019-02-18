@@ -1,0 +1,45 @@
+
+
+{% extends 'base/base_seller.html' %}
+
+{% block mess %}
+ <div class="x-nav">
+      <span class="layui-breadcrumb">
+        <a href="#">商品管理</a>
+        <a href="{% url 'goods:goodsadd' %}">增加类型</a>
+      </span>
+    </div>
+    <div class="x-body">
+      <table class="layui-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>分类名</th>
+
+            <th>操作</th>
+        </thead>
+        <tbody>
+
+          {% for i in list %}
+          <tr>
+            <td>{{ i.type_id }}</td>
+			<td>{{ i.type_name }}</td>
+
+            <td><a href="{% url 'goods:modlytype' i.type_id %}">编辑</a>
+                <a href="{% url 'goods:delettype' i.type_id %}">删除</a>
+            </td>
+          </tr>
+              {% empty %}
+          <tr>
+            <td colspan="3" align="center">暂无商品类型</td>
+          </tr>
+           {% endfor %}
+
+        </tbody>
+      </table>
+    </div>
+
+
+
+
+{% endblock %}

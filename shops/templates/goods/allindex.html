@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <style>
+        #da_da a {
+            font-family: 微软雅黑;
+            color: #449d44;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+
+    <div class="body">
+        <ul>
+
+            <li id="da"><img src="{% static 'images/002.jpg' %}" alt="">
+            </li>
+
+            <div id="da_da">类别：
+                {% for foo in list1 %}
+                    <a href="{% url 'goods:goodslist1' foo.type_id %}">{{ foo.type_name }}</a>
+
+{#                    <select id="myselect" name="myselect">#}
+{##}
+{#                        <option value="">全部</option>#}
+{##}
+{#                        <option value="3">国产</option>#}
+{##}
+{#                        <option value="4">进口</option>#}
+{#                    </select>#}
+{##}
+{#                    <script type="text/javascript">#}
+{#                        $(function () {#}
+{#                            $('#myselect').change(function () {#}
+{#                                window.location.href = "/goods/goodslist1/" + $(this).val()#}
+{#                            })#}
+{#                        })#}
+{#                    </script>#}
+
+
+                {% endfor %}
+            </div>
+
+            {% for f in list %}
+                {#              为了获取卖家id 为了评论里用  seller_id#}
+                {#                #这里加了f.seller_id,为了去 def goods_introduce(request,pk): 的方法1#}
+                <li><a href="{% url 'users:goods_introduce' f.goods_id %}"><img src="{% static f.goods_pic %}"
+                                                                                alt=""></a>
+                    <p><a href="{% url 'users:goods_introduce' f.goods_id %}">{{ f.goods_name }}</a></p>
+                    <p style="">￥{{ f.goods_xprice }}元<s>￥{{ f.goods_oprice }}元</s></p>
+                </li>
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+
+    <div>
+        <ul class="pagination">
+            {#                        #上一页情况#}
+            {% if list.has_previous %}
+                <li><a href="/Goods/goodslist?page={{ list.previous_page_number }}">上一页</a></li>
+            {% else %}
+                <li class="disabled"><a href="#">上一页</a></li>
+            {% endif %}
+            {#                      #中间部分#}
+            {% for num in list.paginator.page_range %}
+                {% if num == Current %}
+                    <li class="active"><a href="/Goods/goodslist?page={{ num }}">{{ num }}</a></li>
+                {% else %}
+                    <li><a href="/Goods/goodslist?page={{ num }}">{{ num }}</a></li>
+                {% endif %}
+            {% endfor %}
+
+            {% if list.has_next %}
+                <li><a href="/Goods/goodslist?page={{ list.next_page_number }}">下一页</a></li>
+            {% else %}
+                <li class="disabled"><a href="">下一页</a></li>
+            {% endif %}
+
+        </ul>
+
+    </div>
+
+
+
+
+
+{% endblock %}
+
+
+
+

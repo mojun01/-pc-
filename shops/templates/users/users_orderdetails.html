@@ -1,0 +1,73 @@
+
+{% extends 'user_base/user_base.html' %}
+{% load static %}
+{% block title %}会员中心-订单查看详情{% endblock %}
+{% block bobx %}
+    <div class="xq">
+       <div class="location"><a href="{% url 'users:user_order' %}">我的订单</a> >查看订单状态</div>
+        <div class="shouhuo">
+            <div class="shouhuo_top">收货信息</div>
+            <div class="shouhuo_bottom">
+{#                #收货地址#}
+                <p>收货人：{{ adresslist.adress_name }}</p>
+                <p>联系电话：{{ adresslist.phone_user }}</p>
+                <p>收货地址：{{ adresslist.adress_username }}</p>
+            </div>
+        </div>
+
+        <table width="100%" cellspacing="0" cellpadding="0" border="0" class="table1">
+            <tr style="height: 50px">
+                <td width="20%" align="center">商品</td>
+                <td width="20%" align="center">名称</td>
+                <td  width="20%" align="center">单价</td>
+                <td  width="20%" align="center">数量</td>
+                <td  width="20%" align="center">实付金额</td>
+            </tr>
+        </table>
+{#         #订单状态#}
+        <table width="100%" cellspacing="0" cellpadding="0" border="0" class="table2">
+            <tr style="height: 50px" class="table2" >
+                <td width="30%" >日期:{{ order_tatus.order_time|date:"Y-m-d H:i:s" }}</td>
+                <td width="30%" >订单号:{{ order_tatus.order_num }}</td>
+                <td width="30%" >订单状态:
+                    {% if order_tatus.order_status == 0 %}
+                    待发货
+                    {% elif order_tatus.order_status == 1 %}
+                    待收货
+                    {% elif order_tatus.order_status == 2 %}
+                    去评价
+                    {% endif %}
+                </td>
+                <td width="40%"></td>
+
+            </tr>
+        </table>
+
+        <table width="100%" cellspacing="0" cellpadding="0" border="0" class="table3" style="border-top:none">
+{#    #是详情页#}
+      {% for  xdatalist in order_data %}
+
+       <tr style="height: 50px;border-top:none; border-bottom: 1px solid #cccccc" >
+            <td width="20%" align="center">
+{#                      goods_introduce数据在goods表    意思是在商品介绍里面看订单的 下单的详情 ，路劲是反过来找和解析#}
+                <a href="{% url 'users:goods_introduce' xdatalist.order_id %}" target="_blank">
+                    <img src="{% static xdatalist.goods_pic %}"/>
+                </a>
+            </td>
+           <td  width="20%" align="center">
+               <a href="{% url 'users:goods_introduce' xdatalist.order_id %}" target="_blank">{{ xdatalist.goods_name }}</a>
+           </td>
+            <td width="20%" align="center"  ><span class="price123">￥{{ xdatalist.goods_xprice|floatformat:2 }}元</span></td>
+            <td width="20%" align="center" >{{ xdatalist.goods_count }}</td>
+           <td width="20%" align="center"><span class="price123">￥{{ xdatalist.goods_xiaoji|floatformat:2 }}元</span></td>
+
+        </tr>
+        {% endfor %}
+    </table>
+
+    <p style=" text-align: right; line-height: 50px; font-family:'微软雅黑'; font-size: 20px; ">商品总计：￥{{ order_tatus.order_price|floatformat:2 }}元</p>
+   </div>
+{% endblock %}
+
+
+{#order_price#是状态的数据#}

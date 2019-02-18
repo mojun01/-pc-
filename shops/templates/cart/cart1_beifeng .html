@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/cart.css' %}">
+    <style>
+
+    #www a img{
+        width: 100px;
+        height: 100px;
+    }
+  
+
+    </style>
+    <div class="body-douwuche">
+    <div>
+        <h3>我的购物车</h3>
+        <hr style="height:1px;border:none;border-top:1px solid #555555;" />
+    </div>
+{#        {% url 'users:cartsdo' %}#}
+     <form method="post" action="#">
+            {% csrf_token %}
+        <div>
+            <table class="table-cart">
+
+                    <tr class="top_s1">
+                        <td>商品名称</td>
+                        <td>商品缩略图</td>
+                        <td>商品单价</td>
+                        <td>商品数量</td>
+                        <td>商品小计</td>
+                        <td>操作</td>
+                    </tr>
+                 {% for cart in cart_user %}
+                <tr class="top_x2">
+                    <td ><a href="" name="shopname">{{ cart.goods_name }}</a></td>
+
+                    <td id="www"><a href=""><img src="{% static cart.goods_pic %}" alt="" name="shopimg"></a></td>
+
+{#        dt><a href="#"><img src="{% static foolist.goods_pic %}"/> </a></dt>#}
+
+                    <td>￥<a href="" name="jiage">{{ cart.goods_xprice|floatformat:2 }}</a>元</td>
+                    <td>
+                            <input type="submit" name="-" value="-" class="btn" formaction="{% url 'cart:decgoodsnum' cart.goods_id %}" />
+                            <input type="text" value="{{ cart.goods_count }}" name="goods_count" class="text1"/>
+                            <input type="submit" name="+" value="+" class="btn" formaction="{% url 'cart:addgoodsnum' cart.goods_id %}"/>
+                    </td>
+{#                    <td ><a href="" name="shul">{{ cart.goods_count }}</a></td>#}
+                    <td>￥<a href="" name="num">{{ cart.goods_xiaoji|floatformat:2 }}</a></td>
+                    <td><a href="{% url 'cart:deletcart' cart.goods_id %}">删除</a></td>
+                </tr>
+                {% empty %}
+                <tr class="top_x3">
+                    <td colspan="6">购物车空空如也，赶紧来购物~~~</td>
+                </tr>
+                     
+                {% endfor %}
+
+
+
+            </table>
+            <div>
+                <button type="submit" class="btn btn-success" id="anniu" name="delet" formaction="{% url 'cart:clearcart' %}">清空购物车</button>
+                <a href="" class="heji" name="">总计{{ sunprice.Total|floatformat:2 }}元</a>
+            </div>
+
+            <input type="hidden" name="seller_id" value="{{ cart.seller_id }}"/>
+            <input type="hidden" name="goods_id" value="{{ cart.goods_id }}"/>
+            <input type="hidden" name="goods_name" value="{{ cart.goods_name }}"/>
+            <input type="hidden" name="goods_pic" value="{{ cart.goods_pic }}"/>
+            <input type="hidden" name="goods_xprice" value="{{ cart.goods_xprice }}"/>
+
+            <div>
+              <button type="submit" class="btn btn-info" id="xiadan" formaction="{% url 'order:ordershow' %}">立即下单</button>
+            </div>
+
+        </div>
+    </form>
+    </div>
+{% endblock %}
+
+
+

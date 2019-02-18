@@ -1,0 +1,29 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="body">
+        <ul>
+
+            <li id="da"><img src="{% static 'images/banner.jpg' %}" alt="">
+            </li>
+
+            {% for f in page %}
+            <li><a href="{% url 'users:goods_introduce' f.goods_id %}"><img src="{% static f.goods_pic %}" alt=""></a>
+                <p><a href="{% url 'users:goods_introduce' f.goods_id %}">{{ f.goods_name }}</a></p>
+                <p>￥{{ f.goods_xprice }}元<s>￥{{ f.goods_oprice }}元</s></p>
+            </li>
+                {% empty %}
+                <p style="color:green; font-family: 黑体;font-size: 30px">暂无商品，等待您的添加！</p>
+            {% endfor %}
+
+        </ul>
+
+
+    </div>
+{% endblock %}
+
+
+
+

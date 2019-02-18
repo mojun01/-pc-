@@ -1,0 +1,37 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <style>
+    #daa a{
+      font-family: 宋体;
+        color:black;
+    }
+    </style>
+
+    <div class="body">
+        <ul>
+
+            <li id="da"><img src="{% static 'images/banner.jpg' %}" alt="">
+            </li>
+            <div id="daa" style="width: 100%;height: 50px;margin: auto;line-height: 50px;text-align: right;font-size:20px;">
+                <a href="{% url 'goods:goodslist' %}">更多>></a>
+            </div>
+            {% for f in goodlist %}
+{#              为了获取卖家id 为了评论里用  seller_id#}
+{#                #这里加了f.seller_id,为了去 def goods_introduce(request,pk): 的方法1#}
+            <li><a href="{% url 'users:goods_introduce' f.goods_id %}"><img src="{% static f.goods_pic %}" alt=""></a>
+                <p><a href="{% url 'users:goods_introduce' f.goods_id %}">{{ f.goods_name }}</a></p>
+                <p style="">￥{{ f.goods_xprice }}元<s>￥{{ f.goods_oprice }}元</s></p>
+            </li>
+            {% endfor %}
+
+        </ul>
+    
+    
+    </div>
+{% endblock %}
+
+
+
+

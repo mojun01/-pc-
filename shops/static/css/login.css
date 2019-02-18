@@ -1,0 +1,14 @@
+
+
+.body .tup{
+    height: 400px;
+    width: 500px;
+    background-image:url("../images/huiyuan.jpg") ;
+    display:inline-block;
+}
+.box{
+    width: 500px;
+    height: 300px;
+    display:inline-block;
+    margin: auto;
+}

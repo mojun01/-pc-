@@ -1,0 +1,115 @@
+
+
+{% extends 'base/base_seller.html' %}
+{% load static %}
+{% block mess %}
+
+
+  <body>
+    <div class="x-body">
+        <form class="layui-form" method="post" action="" id="myform">
+            {% csrf_token %}
+          <div class="layui-form-item">
+              <label for="username" class="layui-form-label">
+                  <span class="x-red">*</span>角色名
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="name" name="name" required="" lay-verify="required"
+                  autocomplete="off" class="layui-input">
+              </div>
+            <div class="layui-form-mid layui-word-aux">
+                  <span class="x-red">*</span>将会成为您唯一的登入名
+              </div>
+          </div>
+
+          <div class="layui-form-item">
+              <label for="phone" class="layui-form-label">
+                  <span class="x-red">*</span>路由名
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="url_name" name="url_name" required=""
+                  autocomplete="off" class="layui-input">
+              </div>
+              <div class="layui-form-mid layui-word-aux">
+                  <span class="x-red">*</span>将会成为您唯一的登入名
+              </div>
+          </div>
+
+          <div class="layui-form-item">
+              <label for="L_email" class="layui-form-label">
+                  <span class="x-red">*</span>命名空间
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="namespace" name="namespace" required=""
+                  autocomplete="off" class="layui-input">
+              </div>
+{#              <div class="layui-form-mid layui-word-aux">#}
+{#                  <span class="x-red">*</span>#}
+{#              </div>#}
+          </div>
+
+{#          <div class="layui-form-item">#}
+{#              <label class="layui-form-label"><span class="x-red">*</span>角色</label>#}
+{#              <div class="layui-input-block">#}
+{#                <input type="checkbox" name="like1[write]" lay-skin="primary" title="超级管理员" checked="">#}
+{#                <input type="checkbox" name="like1[read]" lay-skin="primary" title="编辑人员">#}
+{#                <input type="checkbox" name="like1[write]" lay-skin="primary" title="宣传人员" checked="">#}
+{#              </div>#}
+{#          </div>#}
+          <div class="layui-form-item">
+              <label for="L_repass" class="layui-form-label">
+              </label>
+              <button  class="layui-btn" lay-filter="add" lay-submit="">
+                  添加
+              </button>
+          </div>
+      </form>
+    </div>
+    <script>
+        layui.use(['form','layer'], function(){
+            $ = layui.jquery;
+          var form = layui.form
+          ,layer = layui.layer;
+
+          //自定义验证规则
+          form.verify({
+            nikename: function(value){
+              if(value.length < 3){
+                return '昵称至少得3个字符啊';
+              }
+            }
+
+          });
+
+          //监听提交
+         form.on('submit(add)', function (data) {
+                //发异步，把数据提交给python
+                $.post('{% url "seller:dopower" %}', $("#myform").serialize(), function (data) {
+                    if (data.status == 1) {
+                        window.parent.location.reload()
+                        layer.alert("添加成功", {icon: 6}, function () {
+                            var index = parent.layer.getFrameIndex(window.name)
+                            parent.layer.close(index) //关闭当前的form
+                        });
+                    } else {
+                        layer.alert("添加失败", {icon: 6}, function () {
+                            var index = parent.layer.getFrameIndex(window.name)
+                            parent.layer.close(index)
+                        });
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+{#    <script>var _hmt = _hmt || []; (function() {#}
+{#        var hm = document.createElement("script");#}
+{#        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";#}
+{#        var s = document.getElementsByTagName("script")[0];#}
+{#        s.parentNode.insertBefore(hm, s);#}
+{#      })();</script>#}
+  </body>
+
+
+
+{% endblock %}

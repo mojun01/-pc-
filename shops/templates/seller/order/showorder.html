@@ -1,0 +1,51 @@
+{% extends 'base/base_seller.html' %}
+{% block mess %}
+    <div class="x-nav">
+      <span class="layui-breadcrumb">
+        <a href="#">订单管理</a>
+      </span>
+    </div>
+    <div class="x-body">
+        <table class="layui-table">
+            <thead>
+            <tr>
+                <th>订单id</th>
+                <th>订单编号</th>
+                <th>下单时间</th>
+                <th>订单总金额</th>
+                <th>订单状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for foo in tatus %}
+                <tr>
+                    <td>{{ foo.mass_id }}</td>
+                    <td>{{ foo.order_num }}</td>
+                    <td>{{ foo.order_time }}</td>
+                    <td>￥{{ foo.order_price }}元</td>
+                    <td>已付款</td>
+                    <td>
+                        {% if foo.order_status == 0 %}
+                            <a href="{% url 'seller:fahuo' foo.mass_id %}">待发货</a>
+                        {% elif foo.order_status == 1 %}
+                            <a href="">已发货</a>
+
+                        {% elif foo.order_status == 2 %}
+                            <p>已评价</p>
+                            <a href="{% url 'users:goods_introduce' foo.mass_id %}">查看评价</a>
+                        {% endif %}
+                        <a href="{% url 'seller:show_xiangqing' foo.mass_id foo.adress_id %}">查看详情</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="8" align="center">暂无订单</td>
+                </tr>
+            {% endfor %}
+
+
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

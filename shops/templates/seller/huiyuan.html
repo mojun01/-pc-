@@ -1,0 +1,53 @@
+{% extends 'base/base_seller.html' %}
+{% load static %}
+{% block mess %}
+    <div class="x-nav">
+      <span class="layui-breadcrumb">
+        <a href="#">订单管理</a>
+      </span>
+    </div>
+    <div class="x-body">
+        <table class="layui-table">
+            <thead>
+            <tr>
+                <th>昵称</th>
+                <th>sex</th>
+                <th>age</th>
+                <th>简介</th>
+                <th>头像</th>
+                <th>email</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for foo in huiyuan %}
+                <tr>
+{#                username 是跟着模型走的#}
+                    <td>{{ foo.username }}</td>
+
+                    <td>
+                        {% if foo.user_sex == 0 %}
+                        <p>女</p>
+                        {% elif foo.user_sex == 1 %}
+                        <p>男</p>
+                        {% endif %}
+                        
+                    </td>
+                    <td>{{ foo.user_age }}</td>
+                    <td>{{ foo.user_intro }}</td>
+                    <td><img src="{% static foo.user_photo %}" alt=""></td>
+                    <td>{{ foo.user_email }}</td>
+                    <td><a href="{% url 'seller:sendemail' foo.userid  %}">发送邮件</a></td>
+                
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="8" align="center">暂无会员</td>
+                </tr>
+            {% endfor %}
+
+
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,99 @@
+
+
+{% extends 'base/base_seller.html' %}
+ {% load static %}
+{% block mess %}
+ <div class="x-nav">
+      <span class="layui-breadcrumb">
+        <a href="">商品管理</a>
+        <a href="">商品列表</a>
+      </span>
+    </div>
+    <div class="x-body">
+      <table class="layui-table">
+        <thead>
+          <tr>
+		    <th>商品id</th>
+            <th>商品图片</th>
+            <th>商品编号</th>
+            <th>商品名称</th>
+            <th>商品原价</th>
+            <th>商品现价</th>
+            <th>商品库存</th>
+			<th>商品存储方法</th>
+            <th>是否上架</th>
+            <th>操作</th>
+			</tr>
+        </thead>
+        <tbody>
+        {% for foo in list %}
+
+          <tr>
+            <td>{{ foo.goods_id }}</td>
+            <td><img src="{% static foo.goods_pic %}" alt=""></td>
+			<td>{{ foo.goods_num }}</td>
+            <td>{{ foo.goods_name }}</td>
+            <td>{{ foo.goods_oprice }}</td>
+            <td>{{ foo.goods_xprice }}</td>
+            <td>{{ foo.goods_count }}</td>
+			<td>{{ foo.goods_method }}</td>
+            <td>{{ foo.goods_ishow }}</td>
+            <td >
+				<a href="{% url 'goods:modlygoods' foo.goods_id %}">编辑</a>
+                <a href="{% url 'goods:deletgoods' foo.goods_id %}">删除</a>
+                    {% if foo.goods_ishow == 1  %}
+                        <a href="{% url 'goods:ishowx' foo.goods_id  %}">下架</a>
+                    {% else  %}
+                        <a href="{% url 'goods:ishows' foo.goods_id  %}">上架</a>
+                    {% endif %}
+                <a href="{% url 'users:goods_introduce' foo.goods_id %}">查看评价信息</a>
+            </td>
+          </tr>
+          {% empty %}
+            <tr>
+                <td colspan="9" align="center">暂无商品</td>
+            </tr>
+
+
+        {% endfor %}
+
+{#添加上下页功能       t#}
+        <tr>
+                <td colspan="9">
+                    <ul class="pagination">
+{#                        #上一页情况#}
+                    {% if list.has_previous %}
+                        <li><a href="/Goods/goodslist_show?page={{ list.previous_page_number }}">上一页</a></li>
+                    {% else %}
+                        <li class="disabled"><a href="#">上一页</a></li>
+                    {% endif %}
+{#                      #中间部分#}
+                    {% for num in list.paginator.page_range %}
+                    {% if num == Current %}
+                        <li class="active"><a href="/Goods/goodslist_show?page={{ num }}">{{ num }}</a></li>
+                    {% else %}
+                        <li><a href="/Goods/goodslist_show?page={{ num }}">{{ num }}</a></li>
+                    {% endif %}
+                    {% endfor %}
+
+                    {% if list.has_next %}
+                        <li><a href="/Goods/goodslist_show?page={{ list.next_page_number }}">下一页</a></li>
+                    {% else %}
+                        <li class="disabled"><a href="">下一页</a></li>
+                    {% endif %}
+
+                    </ul>
+
+                </td>
+            </tr>
+
+
+
+
+        </tbody>
+      </table>
+
+    </div>
+
+
+{% endblock %}

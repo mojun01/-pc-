@@ -1,0 +1,32 @@
+{#{% load static from staticfiles %}#}
+
+{% extends 'base/base_seller.html' %}
+
+{% block mess %}
+<div class="x-body layui-anim layui-anim-up">
+        <form class="layui-form" method="post" action="{% url 'goods:goodstypeaddDo' %}">
+            {% csrf_token %}
+          <div class="layui-form-item">
+              <label for="L_email" class="layui-form-label">
+                  <span class="x-red">*</span>商品类别
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="L_email" name="type_name" required=""
+                  autocomplete="off" class="layui-input" placeholder="请输入商品类型"/>
+              </div>
+          </div>
+
+           <div class="layui-form-item">
+              <label for="L_repass" class="layui-form-label">
+              </label>
+              <button  class="layui-btn" lay-filter="add" lay-submit="" >
+                  增加商品类型
+              </button>
+
+          </div>
+
+            
+        </form>
+</div>
+
+{% endblock %}

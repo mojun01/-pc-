@@ -1,0 +1,58 @@
+
+{% extends 'user_base/user_base.html' %}
+{% load static %}
+{% block title %}会员中心--用户订单{% endblock %}
+{% block bobx %}
+     <table width="100%" cellspacing="0" cellpadding="0" border="0" class="table1">
+        <tr style="height: 50px">
+             <td width="20%" align="center">商品</td>
+            <td width="20%" align="center">名称</td>
+            <td  width="20%" align="center">单价</td>
+            <td  width="20%" align="center">数量</td>
+            <td  width="20%" align="center">实付金额</td>
+        </tr>
+    </table>
+{#    #状态#}
+    {% for status in ordertatuslist %}
+
+
+{#         #这个为详情页shuju#}
+        {% for xdata in orderdatalist %}
+            {% if status.mass_id == xdata.mess_id %}
+                    <table width="100%" cellspacing="0" cellpadding="0" border="0" class="table3" style="border-top:none">
+                       <tr style="height: 50px;border-top:none" >
+                            <td width="20%" align="center">
+                                <a href="{% url 'users:goods_introduce' xdata.goods_id %}" target="_blank">
+                                    <img src="{% static xdata.goods_pic %}"/>
+                                </a>
+                            </td>
+                           <td  width="20%" align="center">
+                               <a href="{% url 'users:goods_introduce' xdata.goods_id %}" target="_blank">{{ xdata.goods_name }}</a>
+                           </td>
+                            <td width="20%" align="center"  ><span class="price123">￥{{ xdata.goods_xprice|floatformat:2 }}元</span></td>
+                            <td width="20%" align="center" >{{ xdata.goods_count }}</td>
+                           <td width="20%" align="center"><span class="price123">￥{{ xdata.goods_xiaoji|floatformat:2 }}元</span></td>
+                        </tr>
+                    </table>
+                    <table width="100%" cellspacing="0" cellpadding="0" border="0" class="table2">
+        <tr style="height: 50px" class="table2" >
+            <td width="15%" >日期:{{ status.order_time|date:"Y-m-d" }}</td>
+            <td width="25%" >订单号:{{ status.order_num }}</td>
+            <td width="40%">订单状态：
+            {% if status.order_status == 0 %}
+                待发货
+            {% elif status.order_status == 1 %}
+                <a href="{% url 'users:shouhuo' status.mass_id %}">收货</a>
+            {% elif status.order_status == 2 %}
+                <a href="{% url 'users:commentgoodsadd' xdata.goods_id xdata.seller_id %}">去评价</a>
+                <a href="{% url 'users:goods_introduce' status.mass_id %}">查看评价</a>
+            {% endif %}
+            </td>
+            <td width="10%"><a href="{% url 'users:users_orderdetails' status.mass_id status.adress_id %}">查看订单详情</a></td>
+        </tr>
+    </table>
+{#        #以上为状态的数据#}
+            {% endif %}
+            {% endfor %}
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,60 @@
+
+{% extends 'user_base/shop_houtai.html' %}
+
+{% block bobx %}
+    <form class="form-horizontal" method="post" action="{% url 'seller:storedo' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">店铺名称</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="inputEmail3" placeholder="name" name="shop_name">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">卖家昵称</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="inputEmail3" placeholder="昵称让客户更容易记住你" name="seller_name">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">邮箱</label>
+        <div class="col-sm-4">
+        <input type="email" class="form-control" id="inputPassword3" placeholder="Email" name="seller_email" >
+        </div>
+    </div>
+
+  <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">店铺地址</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" id="inputPassword3" placeholder="address" name="shop_adress">
+    </div>
+  </div>
+        
+  <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label" > 国籍</label>
+    <div class="col-sm-4">
+        <input type="radio" name="user_sex"
+                  value="1">境内
+        <input type="radio" name="user_sex"
+                  value="0">境外
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">店铺logo</label>
+    <div class="col-sm-4">
+      <input type="file" class="form-control" id="inputPassword3" placeholder="logo" name="shop_logo">
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">免费开店</button>
+    </div>
+  </div>
+</form>
+{% endblock %}

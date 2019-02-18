@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <style>
+    #kan{
+        width: 90%;
+        margin:0 auto;
+    }
+    div a{
+        text-decoration: none;
+    }
+    span{
+        font-size: 30px;
+    }
+
+    a:hover{
+        color: #00F7DE;
+        text-decoration: none;
+    }
+    </style>
+<div id="kan">
+    <h1>恭喜你已经成功提交订单</h1>
+    <hr style="height:1px;border:none;border-top:1px solid #555555;" />
+</div>
+    <form method="post" action="{% url 'order:payorder' %}">
+    {% csrf_token %}
+    <div>
+        <span>订单编号：<span>   </span>{{ messager.order_num }}</span> &nbsp; &nbsp;&nbsp;
+        <span>订单金额：￥<span>  </span>{{ messager.order_price }}  元</span>&nbsp; &nbsp;&nbsp;
+        <span><a href="{% url 'users:user_order' %}">查看订单详情</a></span>
+        <input type="hidden" name="order_price" value="{{ messager.order_price }}"/>
+        <input type="hidden" name="order_id" value="{{ messager.order_num }}"/>
+        <span><input type="submit" value="支付宝支付"></span>
+    
+    </div>
+
+   </form>
+
+
+{% endblock %}

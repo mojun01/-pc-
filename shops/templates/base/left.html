@@ -1,0 +1,136 @@
+
+
+{% load static from staticfiles %}
+
+ <div class="left-nav">
+      <div id="side-nav">
+        <ul id="nav">
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe6b8;</i>
+                    <cite>商品管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="{% url 'goods:goodslist_show' %}">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>商品列表</cite>
+
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="{% url 'goods:goodsadd' %}">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>商品添加</cite>
+
+                        </a>
+                    </li>
+
+                    <li>
+                        <a _href="{% url 'goods:goodstypeadd' %}">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>商品类型添加</cite>
+
+                        </a>
+                    </li>
+
+                    <li>
+                        <a _href="{% url 'goods:goodsShow' %}">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>商品类型列表</cite>
+
+                        </a>
+                    </li>
+
+                    
+
+                </ul>
+            </li>
+            
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe6b8;</i>
+                    <cite>订单管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="{% url 'seller:showorder' %}">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>订单列表</cite>
+
+                        </a>
+                    </li >
+                </ul>
+            </li>
+
+
+
+
+
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe6b8;</i>
+                    <cite>会员中心</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="{% url 'seller:huiyuan' %}">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>会员列表</cite>
+
+                        </a>
+                    </li >
+                </ul>
+            </li>
+
+
+              <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe6b8;</i>
+                    <cite>管理分配</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="{% url 'seller:management' %}">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>权限管理</cite>
+
+                        </a>
+                    </li >
+                </ul>
+
+                   <ul class="sub-menu">
+                    <li>
+                        <a _href="{% url 'seller:roles' %}">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>角色列表</cite>
+
+                        </a>
+                    </li >
+                </ul>
+
+                    <ul class="sub-menu">
+                    <li>
+                        <a _href="">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>权限列表</cite>
+
+                        </a>
+                    </li >
+                </ul>
+            </li>
+
+
+
+
+
+
+
+        </ul>
+      </div>
+    </div>
+    <!-- <div class="x-slide_left"></div> -->

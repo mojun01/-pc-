@@ -1,0 +1,17 @@
+
+#tup01{
+    height: 400px;
+    width: 500px;
+    background-image:url("../images/huiyuan.jpg") ;
+    display:inline-block;
+    /*float: left;*/
+}
+#box001{
+    width: 500px;
+    height: 300px;
+    display:inline-block;
+    /*float: right;*/
+    margin: auto;
+}
+
+

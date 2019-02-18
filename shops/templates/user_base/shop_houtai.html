@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link type="text/css" href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet"/>
+    <link type="text/css" href="{% static 'css/css/index.css' %}" rel="stylesheet"/>
+    <script type="text/javascript" src="{% static 'js/js/jquery.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/main/mains.css' %}">
+</head>
+<style>
+    .center_box p{
+        font-size: 25px;
+        font-family: 宋体 黑体;
+        color: #4cae4c;
+    }
+</style>
+<body>
+    <!-- 头部开始 -->
+   <div class="header">
+{#    <ul>#}
+{#        <li><a href="">[卖家入口]</a></li>#}
+{#        <li><a href="">[免费开店]</a></li>#}
+{#         <li><a href="{% url 'cart:cartshow' %}">[进购物车]</a></li>#}
+{#        {% if request.session.uname %}#}
+{#            欢迎:{{ request.session.uname }}#}
+{#            <img src="{% static 'media/img/20181116192810.jpg' %}" width="30" height="30"/> 登录成功#}
+{#            <a href="{% url 'users:sign' %}">切换账号</a>#}
+{#        {% else %}#}
+{#         <li><a href="{% url 'users:sign' %}">[注册惊喜]</a></li>#}
+{#        <li><a href="{% url 'users:login' %}">[登录]</a></li>#}
+{#        {% endif %}#}
+{##}
+{#    </ul>#}
+    </div>
+
+
+    <div class="header_logo">
+            <div class="logo"></div>
+            <div class="nav">
+                <ul>
+                    <li><a href="{% url 'users:main' %}">首页<br/>Home</a></li>
+                    <li><a href="">鲜果<br/>Fruit</a></li>
+                    <li><a href="{% url 'store:allstore' %}">店铺<br/>Store</a></li>
+                    <li><a href="{% url 'users:user_order' %}">会员中心<br/>VIP Club</a></li>
+                </ul>
+            </div>
+    </div>
+    <!-- 头部结束 -->
+    
+ <div class="center_box">
+ <p>卖家再开店>></p>
+     <div class="cbbox_left">
+
+     </div>
+     <div class="cbbox_right">
+        {% block bobx %}
+        {% endblock %}
+     </div>
+ </div>
+<div class="footer">网站版权归全球生鲜网所有</div>
+</body>
+</html>
+
+
+

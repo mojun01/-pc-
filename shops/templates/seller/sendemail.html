@@ -1,0 +1,46 @@
+{% extends 'base/base_seller.html' %}
+{% load static %}
+{% block mess %}
+
+
+    <form class="form-horizontal" method="post" action="{% url 'seller:sendemaildo' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">会员邮箱</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="inputEmail3" placeholder="请保护好客户隐私，贩卖信息可耻！" readonly name="send_email">
+        </div>
+      </div>
+
+    <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">邮件标题</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="inputPassword3" placeholder="标题" name="send_title" >
+        </div>
+  </div>
+
+
+
+  <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">邮件内容</label>
+    <div class="col-sm-10">
+        <textarea class="form-control" rows="5" name="send_info"></textarea>
+    </div>
+  </div>
+
+        <label for="L_repass" class="layui-form-label">
+                  <input type="hidden" name="user_id" value="{{ user_id }}">
+        </label>
+
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">发送邮件</button>
+    </div>
+  </div>
+</form>
+
+
+
+{% endblock %}

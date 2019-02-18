@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/signin.css' %}">
+    <style>
+
+        #box001 {
+            float: right;
+            margin-top: 60px;
+            margin-right: 300px;
+        }
+
+    </style>
+    <div class="body">
+        <div>
+            <h3>会员登入</h3>
+            <hr style="height:1px;border:none;border-top:1px solid #555555;"/>
+        </div>
+        {#    #左图#}
+        <div id="tup01">
+
+        </div>
+        {#     右边表   #}
+        <div id="box001">
+            <form class="form-horizontal" action="{% url 'users:logindo' %}" method="post" class="box-li">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-5 control-label">姓名</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="inputEmail3" placeholder="请输入注册昵称" name="username">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-5 control-label">密码</label>
+                    <div class="col-sm-5">
+                        <input type="password" class="form-control" id="inputPassword3" placeholder="请输入密码"
+                               name="password">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-5 control-label">图形验证码</label>
+                    <br>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="valid_code" name="valid_code"/>
+                        <img id="valid_img" class="valid-img" src="{% url 'users:get_valid_img' %}" alt="" onclick="reload_code()">
+                        <span id="codeimg"><a href="">看不清 点这里</a></span>
+                    </div>
+                </div>
+
+                <div class="col-sm-offset-5 col-sm-10">
+                    <button type="submit" class="btn btn-success">登入会员</button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <script>
+    function reload_code() {
+                   var timestamp= Date.parse(new Date());
+                   $('#valid_img').attr('src',"{% url 'users:get_valid_img' %}?t="+timestamp)
+
+               }
+    $("#codeimg").click(function () {
+        var a = "{% url 'users:get_valid_img' %}"
+        console.log(a);
+        var suiji = parseInt(Math.random() * 10);
+        a = a + "?" + suiji
+        $(this).attr('src', a);
+        console.log($(this).attr('src'));
+
+    });
+
+    </script>
+
+
+
+
+{% endblock %}

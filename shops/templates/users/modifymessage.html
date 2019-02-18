@@ -1,0 +1,87 @@
+{% extends 'user_base/user_base.html' %}
+
+{% block bobx %}
+    <form class="form-horizontal" method="post" action="{% url 'users:modifymessagedo' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+      <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="inputEmail3" placeholder="{{ request.session.uname }}" readonly name="user_name">
+        </div>
+      </div>
+        <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">邮箱</label>
+    <div class="col-sm-4">
+      <input type="email" class="form-control" id="inputPassword3" placeholder="Email" name="user_email" >
+    </div>
+  </div>
+          <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label" > 性别</label>
+    <div class="col-sm-4">
+        <input type="radio" name="user_sex"
+                  value="1">男
+        <input type="radio" name="user_sex"
+                  value="0">女
+    </div>
+  </div>
+         <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">年龄</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" id="inputPassword3" placeholder="age" name="user_age">
+    </div>
+  </div>
+        <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">照片</label>
+    <div class="col-sm-4">
+      <input type="file" class="form-control" id="inputPassword3" placeholder="photo" name="user_photo">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">个人简介</label>
+    <div class="col-sm-10">
+        <textarea class="form-control" rows="5" name="user_intro"></textarea>
+    </div>
+  </div>
+
+
+   <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label" >图形验证码</label>
+       <br>
+    <div class="col-sm-2">
+      <input type="text" class="form-control" id="valid_code" name="valid_code"/>
+        <img id="valid_img" class="valid-img" src="{% url 'users:get_valid_img' %}" alt="" onclick="reload_code()">
+        <span id="codeimg"><a href="">看不清 点这里</a></span>
+    </div>
+  </div>
+        
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">修改个人资料</button>
+    </div>
+  </div>
+</form>
+    <script>
+    function reload_code() {
+                   var timestamp= Date.parse(new Date());
+                   $('#valid_img').attr('src',"{% url 'users:get_valid_img' %}?t="+timestamp)
+
+               }
+
+
+    $("#codeimg").click(function () {
+                               var a="{% url 'users:get_valid_img' %}"
+                               console.log(a);
+                               var suiji=parseInt(Math.random()*10);
+                               a=a+"?"+suiji
+                               $(this).attr('src',a);
+                               console.log($(this).attr('src'));
+
+                           });
+
+
+    
+    
+    </script>
+
+{% endblock %}

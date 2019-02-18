@@ -1,0 +1,131 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+ul li{
+    list-style: none;
+
+}
+
+a{
+    text-decoration: none;
+}
+#ppp{
+    margin-bottom: 100px;
+}
+.top{
+    width: 100%;
+    height: 150px;
+    position: relative;
+    border: 2px solid #fff;
+    align-content: center;
+}
+.top_s{
+    width: 100%;
+    height: 35px;
+    background-color: #cccccc;
+    margin: 0 auto;
+}
+
+.top_p{
+    width: 90%;
+}
+.top_s .top_p ul{
+    width: 530px;
+    float: right;
+    /*line-height: 35px;*/
+}
+.top_s li a{
+    text-decoration: none;
+    float: right;
+    padding: 10px;
+    margin-left: 10px;
+}
+.top_x{
+    width: 100%;
+    height: 115px;
+}
+.top_x .logo{
+    width: 305px; height: 80px;margin-left: 20px;
+}
+/*#ttt{*/
+    /*width: 380px; height: 20px; float: right;  margin-top: -10px; line-height: 30px; color: #999999; font-family: "微软雅黑"; font-size: 14px;*/
+    /*margin-left:50px;*/
+/*}*/
+
+#ptp{
+    width: 480px;
+    height: 20px;
+    line-height: 30px;
+    color: #999999;
+    font-family:"微软雅黑";
+    font-size: 15px;
+    float: right;
+    margin-top: -10px;
+    margin-left:50px;
+}
+
+/*.nao ul li{ float: left; width: 70px; margin-right: 10px;}*/
+/*.nao ul li a{ color: #999999}*/
+/*.nao ul li a:hover{ color: #64a16a}*/
+.top_x li a{
+
+    text-decoration: none;
+    float: right;
+    margin-top: 6px;
+    margin-left: 45px;
+    color: #999999
+}
+.top_x li a:hover{ color: #ac2925}
+.foot{
+    width: 100%;
+    height: 100px;
+    background-color: #cccccc;
+    border: 2px solid #fff;
+    text-align:Center;
+    padding: 100px 0px;
+    float:left ;
+}
+
+.body{
+    width: 100%;
+    /*height: 100%;*/
+    border: 2px solid #fff;
+    position: relative;
+    overflow: hidden;
+}
+.body #da{
+    width: 100%;
+    height: 500px;
+}
+.body ul li{
+    width: 20%;
+    float: left;
+    text-align: center;
+}
+.body ul li img{
+    width: 100%;
+    height: 100%;
+}
+
+#xiaotu{
+    width: 200px;
+    height: 200px;
+}
+#xiaotu img{
+    width: 100%;
+    height: 100%;
+}
+
+#shu{
+    left: 100px;
+    bottom: 100px;
+    /*float: left;*/
+    align-content: center;
+}
+
+#xia_you{
+    float: right;
+    width: 700px;
+}
+

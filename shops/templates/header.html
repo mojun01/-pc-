@@ -1,0 +1,74 @@
+{% load static %}
+{#<div class="top">#}
+{#    <div class="top_s">#}
+{#        <div class="top_p">#}
+{#            <ul>#}
+{##}
+{#             <li><a href="{% url 'users:sign' %}">[注册有惊喜]</a></li>#}
+{#             <li><a href="{% url 'cart:cartshow' %}">[购物车]</a></li>#}
+{#             <li><a href="{% url 'users:sign' %}">[免费开店]</a></li>#}
+{#            {% if request.session.uname %}#}
+{#                {% for foo in aa %}#}
+{#                  欢迎{{ request.session.uname }}<img src="{{foo.user_photo}}" width="30" height="30"/>登入成功#}
+{#                {% endfor %}#}
+{#                <a href="{% url 'users:sign' %}">切换账号</a>#}
+{#            {% else %}#}
+{#                <li><a href="{% url 'users:login' %}">[登入]</a></li>#}
+{#             {% endif %}#}
+{##}
+{#        </ul>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="top_x">#}
+{#        <div class="logo"><img src="{% static 'images/logo.png' %}" alt=""></div>#}
+{#         <div id="ptp">#}
+{#              <ul>#}
+{#             <li><a href="{% url 'users:main' %}">首页<br/>Home</a></li>#}
+{#             <li><a href="{% url 'users:main' %}">鲜果<br/>Fruit</a></li>#}
+{#             <li><a href="{% url 'users:user_order' %}">会员中心<br/>VIP Club</a></li>#}
+{##}
+{##}
+{#            </ul>#}
+{##}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#</div>#}
+
+
+
+
+    <!-- 头部开始 -->
+   <div class="header">
+    <ul>
+        <li><a href="{% url 'seller:sellerLogin' %}">[卖家入口]</a></li>
+        <li><a href="{% url 'openshop:openshop' %}">[免费开店]</a></li>
+         <li><a href="{% url 'cart:cartshow' %}">[进购物车]</a></li>
+        {% if request.session.uname %}
+            欢迎:{{ request.session.uname }}
+{#            {% for foo in aa %}#}
+            <img src="{% static 'media/img/20181116192810.jpg' %}" width="30" height="30"/>登录成功
+{#             {% endfor %}#}
+            <a href="{% url 'users:loginout' %}">切换账号</a>
+        {% else %}
+         <li><a href="{% url 'users:sign' %}">[注册惊喜]</a></li>
+        <li><a href="{% url 'users:login' %}">[登录]</a></li>
+        {% endif %}
+
+    </ul>
+    </div>
+
+
+    <div class="header_logo">
+            <div class="logo"></div>
+            <div class="nav">
+                <ul>
+                    <li><a href="{% url 'users:main' %}">首页<br/>Home</a></li>
+                    <li><a href="{% url 'goods:goodslist' %}">鲜果<br/>Fruit</a></li>
+                    <li><a href="{% url 'store:allstore' %}">店铺<br/>Store</a></li>
+                    <li><a href="{% url 'users:user_order' %}">会员中心<br/>VIP Club</a></li>
+                </ul>
+            </div>
+    </div>
+    <!-- 头部结束 -->
+

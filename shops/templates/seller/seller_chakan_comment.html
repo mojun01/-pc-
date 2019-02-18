@@ -1,0 +1,58 @@
+
+{% extends 'user_base/houtai_base.html' %}
+{% load static %}
+{% block title %}商家中心-订单评价详情{% endblock %}
+{% block bobx %}
+    <style>
+
+    </style>
+    <div class="xq" id="ll">
+       <div class="location"><a href="#">我的店铺</a> >查看客户评价</div>
+
+
+        <table width="100%" cellspacing="0" cellpadding="0" border="0" class="table1">
+            <tr style="height: 50px">
+                <td width="20%" align="center">商品名称</td>
+                <td width="20%" align="center">评论内容</td>
+                <td width="20%" align="center">评论时间</td>
+                <td width="20%" align="center">用户名称</td>
+                <td width="20%" align="center">店铺名称</td>
+            </tr>
+        </table>
+     {% for  com in comment %}
+{#        <table width="100%" cellspacing="0" cellpadding="0" border="0" class="table2">#}
+{#            <tr style="height: 50px" class="table2" >#}
+{#                <td width="30%" >日期:{{ xdatalist.order_time }}</td>#}
+{#                <td width="30%" >订单号:{{ xdatalist.order_num }}</td>#}
+{#                <td width="40%"></td>#}
+{#            </tr>#}
+{#        </table>#}
+        <table width="100%" cellspacing="0" cellpadding="0" border="0" class="table3" style="border-top:none">
+{#    #是详情页#}
+
+       <tr style="height: 50px;border-top:none; border-bottom: 1px solid #cccccc" >
+            <td width="20%" align="center">
+
+                <a href="{% url 'users:goods_introduce' com.order_id %}" target="_blank">
+                    <img src="{% static com.goods_id %}"/>
+                </a>
+            </td>
+
+            <td  width="20%" align="center">
+                <a href="#" target="_blank">{{ com.comment_content }}</a>
+            </td>
+
+            <td width="20%" align="center"  ><span class="price123">{{ com.comment_time }}</span>
+            </td>
+            <td width="20%" align="center" >{{ com.user_id }}</td>
+            <td width="20%" align="center">{{ com.seller_id }}</td>
+        </tr>
+
+        {% endfor %}
+    </table>
+
+   </div>
+{% endblock %}
+
+
+{#order_price#是状态的数据#}

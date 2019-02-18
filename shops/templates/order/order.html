@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/order.css' %}">
+    <style>
+    .order_x2 img{
+        width: 100px;
+        height: 100px;
+    }
+    </style>
+{#      #下单详情 加入数据库#}
+    
+     <form method="post" action="{% url 'order:addto' %}">
+
+{#      #遍历地址#}
+     <p>收货人信息：<a href="{% url 'order:order_adress' %}">新增收货地址</a></p>
+     {% for foo in addresslist %}
+        <div>
+         <p><input type="radio" value="{{ foo.adress_id }}" name="adress_id"/></p>
+         <p>姓名：{{ foo.adress_name }}</p>
+         <p>电话：{{ foo.phone_user }}</p>
+         <p>收货地址：{{ foo.adress_username }}</p>
+        </div>
+ 
+     {% endfor %}
+{#     <div>#}
+{#     <p>收货人信息：<a href="{% url 'order:order_adress' %}">新增收货地址</a></p>#}
+{#     <p>姓名：{{ foo.adress_name }}</p>#}
+{#     <p>电话：{{ foo.phone_user }}</p>#}
+{#     <p>收货地址：{{ foo.adress_username }}</p>#}
+{#    </div>#}
+
+         {% csrf_token %}
+
+        <table class="table-order">
+
+                <tr class="order_x1">
+                    <td>商品名称</td>
+                    <td>商品缩略图</td>
+                    <td>商品单价</td>
+                    <td>商品数量</td>
+                    <td>商品小计</td>
+                </tr>
+
+ {% for order in cartlist %}
+            <tr class="order_x2">
+                <td>{{ order.goods_name }}</td>
+                <td><img src="{% static order.goods_pic %}" alt=""></td>
+                <td>￥<a href="">{{ order.goods_xprice }}</a>元</td>
+                <td>{{ order.goods_count }}</td>
+                <td>￥<a href="">{{ order.goods_xiaoji }}</a></td>
+            </tr>
+
+
+             {% empty %}
+            <tr class="order_x4">
+                <td colspan="6">购物车没东西啊，你是不是傻！！！</td>
+
+            </tr>
+ {% endfor %}
+        <tr class="order_x3">
+                <td colspan="6"><a href="{% url 'cart:cartshow' %}">返回购物车修改</a></td>
+            </tr>
+
+
+        </table>
+
+        <div>
+
+            <a href="" class="heji" name="orderprice">总计{{ sum.Total|floatformat:2 }}元</a>
+
+        </div>
+
+        <div>
+            <input type="hidden" value="{{ sum.Total|floatformat:2 }}" name="total"/>
+          <button type="submit" class="btn btn-info" id="xiadan">提交订单</button>
+        </div>
+
+
+
+            </form>
+
+
+
+{% endblock %}
